@@ -1,0 +1,25 @@
+#! /bin/bash
+
+if [[ $# < 1 ]]
+then
+   echo "Please provide some file names"
+   exit 1
+fi
+
+for val in $@
+do
+    if [[ -r $val ]]
+    then
+        echo "File $val is readable!"
+    elif [[ ! -r $val ]]
+    then
+	rm $val
+        touch $val
+       
+    elif [[ ! -e $val ]]
+    then
+        touch $val
+    fi
+done
+
+exit 0

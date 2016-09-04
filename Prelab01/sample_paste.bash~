@@ -1,0 +1,17 @@
+#! /bin/bash
+
+if [[ $# < 1 ]]
+then
+	echo "Please give an filename"
+	exit 1
+fi
+
+echo $1
+
+while read line; do
+	val=$( echo "$line" | cut -f2 )
+	val1=$( echo "$line" | cut -f3 )
+	printf "%s:%s" "$val" "$val1"
+done < "$1"
+
+exit 0
