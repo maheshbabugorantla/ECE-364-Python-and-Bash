@@ -1,0 +1,274 @@
+
+import os
+from PySide import QtCore
+from PySide.QtGui import *
+from PySide import QtGui
+from tkinter import *
+from scipy.misc import imsave
+from scipy.misc import imread
+import numpy as np
+
+from HomographyGUI import *
+from Homography import Transformation
+from Homography import ColorTransformation
+from Homography import Effect
+
+class HomographyApp(QMainWindow, Ui_MainWindow):
+
+    def __init__(self, parent = None):
+        super(HomographyApp, self).__init__(parent)
+        self.setupUi(self)
+
+        self.coordMap = {0: self.coord1, 1: self.coord2, 2: self.coord3, 3: self.coord4}
+        self.backSpaceMap = {1: self.coord1, 2: self.coord2, 3: self.coord3, 4: self.coord4}
+
+        # InitialState Step 1
+        self.InitialState()
+        self.load_source.clicked.connect(self.loadSourceImage) # Load the SOurce Image
+        self.load_target.clicked.connect(self.loadTargetImage) # Load the target Image
+        self.acq_points.clicked.connect(self.AcquirePoints) # Acquire Points
+        self.reset.clicked.connect(self.reset_click) # Reset the State
+
+        self.coordNumber = 0 # Keeps Track of which Co-Ordinate Number is being entered
+        self.pointsFill = 0
+        self.source = 0
+        self.target = 0
+
+
+    def InitialState(self):
+
+        self.input_img.setEnabled(False)
+        self.transform_img.setEnabled(False)
+        self.coord1.setEnabled(False)
+        self.coord2.setEnabled(False)
+        self.coord3.setEnabled(False)
+        self.coord4.setEnabled(False)
+        self.comboBox.setEnabled(False)
+        self.label.setEnabled(False)
+        self.transform.setEnabled(False)
+        self.reset.setEnabled(False)
+        self.save.setEnabled(False)
+        self.acq_points.setEnabled(False)
+
+    def loadSourceImage(self):
+        filePath, _ = QFileDialog.getOpenFileName(self, caption='Open Source File ...')
+        if not filePath:
+            return
+        self.loadSourceImagescreen(filePath)
+
+    def loadTargetImage(self):
+        filePath, _ = QFileDialog.getOpenFileName(self, caption='Open target file ...')
+        if not filePath:
+            return
+        self.loadTargetImagescreen(filePath)
+
+    def loadSourceImagescreen(self, filePath):
+
+        self.targetImageage_source = imread(filePath)
+        graphicScene = QtGui.QGraphicsScene()
+        image = QtGui.QPixmap(filePath)
+        pixelMap = QtGui.QGraphicsPixmapItem(image)
+        graphicScene.addItem(pixelMap)
+
+        self.input_img.setScene(graphicScene)
+        self.input_img.fitInView(pixelMap)
+        self.source = 1 # Flag to indicate that the source Image is loaded
+
+        # Once verified that the user has selected both the source and target images then Enable the Acquire Points
+        if self.source == 1 and self.target == 1:
+            self.LoadedState()
+
+    def loadTargetImagescreen(self, filePath):
+        self.targetImage = imread(filePath)
+        graphicScene = QtGui.QGraphicsScene()
+        image = QtGui.QPixmap(filePath)
+        pixelMap = QtGui.QGraphicsPixmapItem(image)
+        graphicScene.addItem(pixelMap)
+        self.targetImagef = filePath # Saving the Original Target Image File Path
+        self.transform_img.setScene(graphicScene)
+        self.transform_img.fitInView(pixelMap)
+        self.target = 1 # Flag to indicate that the target Image is loaded
+
+        # Once verified that the user has selected both the source and target images then Enable the Acquire Points
+        if self.source == 1 and self.target == 1:
+            self.LoadedState()
+
+    def LoadedState(self):
+
+        self.coord1.setEnabled(True)
+        self.coord2.setEnabled(True)
+        self.coord3.setEnabled(True)
+        self.coord4.setEnabled(True)
+        self.acq_points.setEnabled(True)
+        self.label.setEnabled(True)
+        self.input_img.setEnabled(True)
+        self.transform_img.setEnabled(True)
+
+    def getTargetPoints(self, event):
+
+        if self.acq_points.isChecked() == True:
+            if(self.coordNumber >= 0 and self.coordNumber <= 3):
+                x_coord = self.transform_img.mapToScene(event.pos()).x()
+                y_coord = self.transform_img.mapToScene(event.pos()).y()
+
+                if self.coordMap[self.coordNumber] == self.coord1:
+                    self.coord1.setText("{:.1f}, {:.1f}".format(x_coord,y_coord))
+                elif self.coordMap[self.coordNumber] == self.coord2:
+                    self.coord2.setText("{:.1f}, {:.1f}".format(x_coord,y_coord))
+                elif self.coordMap[self.coordNumber] == self.coord3:
+                    self.coord3.setText("{:.1f}, {:.1f}".format(x_coord,y_coord))
+                elif self.coordMap[self.coordNumber] == self.coord4:
+                    self.coord4.setText("{:.1f}, {:.1f}".format(x_coord,y_coord))
+
+                self.coordNumber += 1
+
+    def AcquirePoints(self):
+
+        # Disabling the Source and Target Images
+        self.load_source.setEnabled(False)
+        self.load_target.setEnabled(False)
+        self.transform_img.mousePressEvent = self.getTargetPoints
+
+        if self.pointsFill == 0:
+            self.acq_points.setChecked(True)
+            self.pointsFill += 1
+            self.coord1.setText("")
+            self.coord2.setText("")
+            self.coord3.setText("")
+            self.coord4.setText("")
+
+        else:
+
+            if self.coordNumber == 4:
+                self.acq_points.setChecked(False)
+                self.transform.setEnabled(True)
+                self.reset.setEnabled(True)
+                self.save.setEnabled(True)
+                self.comboBox.setEnabled(True)
+                self.label.setEnabled(True)
+                self.load_source.setEnabled(True)
+                self.load_target.setEnabled(True)
+                self.coordNumber = 0
+                self.ReadyState()
+                self.pointsFill -=1
+
+            elif self.coordNumber < 4:
+                self.load_source.setEnabled(True)
+                self.load_target.setEnabled(True)
+                self.acq_points.setChecked(False)
+                self.coord1.setText("")
+                self.coord2.setText("")
+                self.coord3.setText("")
+                self.coord4.setText("")
+                self.coordNumber = 0
+                self.pointsFill -=1
+
+
+    def keyPressEvent(self, event):
+        if self.acq_points.isChecked() == True:
+            if event.key() == QtCore.Qt.Key_Backspace:
+                if(self.coordNumber >= 1 and self.coordNumber <= 4):
+                    if self.backSpaceMap[self.coordNumber]== self.coord1:
+                        self.coord1.setText("")
+                    elif self.backSpaceMap[self.coordNumber]== self.coord2:
+                        self.coord2.setText("")
+                    elif self.backSpaceMap[self.coordNumber]== self.coord3:
+                        self.coord3.setText("")
+                    elif self.backSpaceMap[self.coordNumber]== self.coord4:
+                        self.coord4.setText("")
+                    self.coordNumber -= 1
+
+    def ReadyState(self):
+        self.save.clicked.connect(self.SaveImage) # Should be called only when in readyState
+        self.transform.clicked.connect(self.apply_transformation) # should be called only when in readyTransformation
+
+    def SaveImage(self):
+        filePath, _ = QFileDialog.getSaveFileName(self, caption='Save target file ...', filter="PNG Files (*.png)")
+        imsave(filePath, self.targetImage, format="png")
+
+    def reset_click(self):
+        print(self.targetImagef)
+        graphicScene = QtGui.QGraphicsScene()
+        image = QtGui.QPixmap(self.targetImagef)
+        pixelMap = QtGui.QGraphicsPixmapItem(image)
+        graphicScene.addItem(pixelMap)
+        self.transform_img.setScene(graphicScene)
+        self.transform_img.fitInView(pixelMap)
+
+        self.coord1.setEnabled(True)
+        self.coord2.setEnabled(True)
+        self.coord3.setEnabled(True)
+        self.coord4.setEnabled(True)
+        self.acq_points.setEnabled(True)
+
+    def mousePressEvent(self, event):
+        self._mouse_button = event.button()
+        super(HomographyApp, self).mousePressEvent(event)
+
+    def apply_transformation(self):
+
+        # Fetches the Effect
+        transformationEffect = self.comboBox.currentText()
+
+        coord_x1, coord_y1 = self.coord1.text().split(",")
+        coord_x2, coord_y2 = self.coord2.text().split(",")
+        coord_x3, coord_y3 = self.coord3.text().split(",")
+        coord_x4, coord_y4 = self.coord4.text().split(",")
+
+        # Creating all the target Points
+        targetPoints = np.array([(coord_x1.strip(),coord_y1.strip()), (coord_x2.strip(),coord_y2.strip()), (coord_x3.strip(),coord_y3.strip()), (coord_x4.strip(),coord_y4.strip())], dtype=np.float64)
+
+        # Grey Scale
+        if(self.targetImageage_source.ndim == 2):
+            inputTransformation = Transformation(self.targetImageage_source)
+
+        # Color Images
+        elif(self.targetImageage_source.ndim == 3):
+            inputTransformation = ColorTransformation(self.targetImageage_source)
+
+        # Checking for the Effects
+        if(transformationEffect == "Nothing"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints)
+
+        elif(transformationEffect == "Rotate 90°"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.rotate90)
+
+        elif(transformationEffect == "Rotate 180°"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.rotate180)
+
+        elif(transformationEffect == "Rotate 270°"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.rotate270)
+
+        elif(transformationEffect == "Flip Horizontally"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.flipHorizontally)
+
+        elif(transformationEffect == "Flip Vertically"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.flipVertically)
+
+        elif(transformationEffect == "Transpose"):
+            print("Inside " + transformationEffect)
+            inputTransformation.setupTransformation(targetPoints=targetPoints, effect= Effect.transpose)
+
+        finalImage = inputTransformation.transformImageOnto(self.targetImage)
+        imsave("blah.png",finalImage)
+        graphicScene = QtGui.QGraphicsScene()
+        image = QtGui.QPixmap("blah.png")
+        pixelMap = QtGui.QGraphicsPixmapItem(image)
+        graphicScene.addItem(pixelMap)
+        self.transform_img.setScene(graphicScene)
+        self.transform_img.fitInView(pixelMap)
+
+        os.remove("blah.png")
+
+if __name__ == "__main__":
+    currentApp = QApplication(sys.argv)
+    currentForm = HomographyApp()
+
+    currentForm.show()
+    currentApp.exec_()

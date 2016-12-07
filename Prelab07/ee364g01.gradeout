@@ -1,0 +1,73 @@
+Prelab07/ee364g01/
+
+
+------------------------------------------------------------------------------------------
+FUNCTION                   | DESCRIPTION                | COMMENTS                   | POINTS    
+------------------------------------------------------------------------------------------
+Point3D_cardinalityExists                                 Function failed to run.      0/0.3     
+Point3D_clone                                             Function failed to run.      0/0.3     
+Point3D_coordinatesExists                                 Function failed to run.      0/0.3     
+Point3D_distanceFrom                                      Function failed to run.      0/0.3     
+Point3D_division                                          Function failed to run.      0/0.3     
+Point3D_equality                                          Function failed to run.      0/0.3     
+Point3D_floatAddition                                     Function failed to run.      0/0.3     
+Point3D_floatSubtraction                                  Function failed to run.      0/0.3     
+Point3D_greaterThan                                       Function failed to run.      0/0.3     
+Point3D_greaterThanOrEqual                                Function failed to run.      0/0.3     
+Point3D_hashExists                                        Function failed to run.      0/0.3     
+Point3D_indexing                                          Function failed to run.      0/0.3     
+Point3D_inequality                                        Function failed to run.      0/0.3     
+Point3D_initializer          correct input                Function failed to run.      0/0.075   
+Point3D_initializer          integer input                Function failed to run.      0/0.075   
+Point3D_initializer          list input                   Function failed to run.      0/0.075   
+Point3D_initializer          string input                 Function failed to run.      0/0.075   
+Point3D_lessThan                                          Function failed to run.      0/0.3     
+Point3D_lessThanOrEqual                                   Function failed to run.      0/0.3     
+Point3D_multiplication                                    Function failed to run.      0/0.3     
+Point3D_nearestPoint                                      Function failed to run.      0/0.3     
+Point3D_negation                                          Function failed to run.      0/0.3     
+Point3D_pointAddition                                     Function failed to run.      0/0.3     
+Point3D_pointSubtraction                                  Function failed to run.      0/0.3     
+Point3D_printPoint                                        Function failed to run.      0/0.3     
+Point3D_tupleExists                                       Function failed to run.      0/0.3     
+PointGroup_Existence                                      Function failed to run.      0/0.5     
+PointGroup_addPoint                                       Function failed to run.      0/0.5     
+PointGroup_cardinalityExists                              Function failed to run.      0/0.5     
+PointGroup_computeBoundingHyperCube                              Function failed to run.      0/1       
+PointGroup_computeNearestNeighbors                              Function failed to run.      0/0.5     
+PointGroup_count                                          Function failed to run.      0/0.5     
+PointGroup_initializer       correct input                Function failed to run.      0/0.2     
+PointGroup_initializer       emptyList                    Test case passed.            0.1/0.1   
+PointGroup_initializer       wrongCardinality             Function failed to run.      0/0.1     
+PointGroup_initializer       wrongKey                     Test case passed.            0.1/0.1   
+PointGroup_membership                                     Function failed to run.      0/0.3     
+PointGroup_pointAddition                                  Function failed to run.      0/0.3     
+PointGroup_pointSubtraction                               Function failed to run.      0/0.3     
+PointND_cardinalityExists                                 Function failed to run.      0/0.5     
+PointND_clone                                             Function failed to run.      0/0.5     
+PointND_distanceFrom                                      Function failed to run.      0/0.5     
+PointND_division                                          Function failed to run.      0/0.3     
+PointND_equality                                          Function failed to run.      0/0.3     
+PointND_floatAddition                                     Function failed to run.      0/0.3     
+PointND_floatSubtraction                                  Function failed to run.      0/0.3     
+PointND_greaterThan                                       Function failed to run.      0/0.3     
+PointND_greaterThanOrEqual                                Function failed to run.      0/0.3     
+PointND_hashExists                                        Function failed to run.      0/0.5     
+PointND_indexing                                          Function failed to run.      0/0.3     
+PointND_inequality                                        Function failed to run.      0/0.3     
+PointND_initializer          correct input                Function failed to run.      0/0.2     
+PointND_initializer          integer input                Function failed to run.      0/0.1     
+PointND_initializer          list input                   Test case passed.            0.1/0.1   
+PointND_initializer          string input                 Test case passed.            0.1/0.1   
+PointND_lessThan                                          Function failed to run.      0/0.3     
+PointND_lessThanOrEqual                                   Function failed to run.      0/0.3     
+PointND_multiplication                                    Function failed to run.      0/0.3     
+PointND_nearestPoint                                      Function failed to run.      0/0.5     
+PointND_negation                                          Function failed to run.      0/0.3     
+PointND_pointAddition                                     Function failed to run.      0/0.3     
+PointND_pointSubtraction                                  Function failed to run.      0/0.3     
+PointND_printPoint                                        Function failed to run.      0/0.5     
+PointND_tupleExists                                       Function failed to run.      0/0.5     
+------------------------------------------------------------------------------------------
+
+Total Score = 0.4

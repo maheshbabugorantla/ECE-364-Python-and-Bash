@@ -1,0 +1,20 @@
+Prelab03/ee364g01/
+
+
+------------------------------------------------------------------------------------------
+FUNCTION                  | DESCRIPTION               | COMMENTS                  | POINTS    
+------------------------------------------------------------------------------------------
+findName                                                Test case passed.           2         
+getColumnSum                                            Test case passed.           2         
+getElementwiseSum                                       Test case passed.           2         
+getFormattedNames                                       Test case passed.           2         
+getFormattedSSN                                         Test case passed.           2         
+getHeadAverage                                          Test case passed.           1         
+getMaxOccurrence                                        Function failed to run.     0         
+getMaxProduct                                           Test case passed.           2         
+getNumberAverage                                        Test case passed.           2         
+getTailMax                                              Test case passed.           1         
+removeDuplicates                                        Test case passed.           2         
+------------------------------------------------------------------------------------------
+
+Total Score = 18

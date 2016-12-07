@@ -1,0 +1,31 @@
+Lab10/inlab/ee364g01
+
+
+----------------------------------------------------------------------------------------------------
+FUNCTION                              | DESCRIPTION                | COMMENTS                   | POINTS    
+----------------------------------------------------------------------------------------------------
+ClearForm                              Error Label Cleared          Test case passed.            5/5       
+ClearForm                              Load Enabled                 Test case passed.            5/5       
+ClearForm                              QLineEdits Cleared           Test case passed.            5/5       
+ClearForm                              Save Disabled                Test case passed.            5/5       
+LoadValidData                          Data Loaded                  Test case passed.            5/5       
+LoadValidData                          Error Label Cleared          Test case passed.            5/5       
+LoadValidData                          Load Disabled                Test case passed.            5/5       
+LoadValidData                          Save Enabled                 Test case passed.            5/5       
+SaveValidDataDirect                                                 Test case passed.            5/5       
+SaveValidDataModified                                               Test case passed.            5/5       
+SaveWithEmptyEntries                   Error Displayed              Test case passed.            3/3       
+SaveWithEmptyEntries                   Target File Not Created      Test case passed.            2/2       
+SaveWithEmptyEntriesFixed              Error Label Cleared          Test case passed.            2/2       
+SaveWithEmptyEntriesFixed              Target File Contents Correct Test case passed.            3/3       
+SaveWithEmptyEntriesPartialFixed       Error Displayed              Test case passed.            3/3       
+SaveWithEmptyEntriesPartialFixed       Target File Not Created      Test case passed.            2/2       
+SaveWithInvalidEntriesAllFixed         Error Label Cleared          Test case passed.            2/2       
+SaveWithInvalidEntriesAllFixed         Target File Contents Correct Test case passed.            3/3       
+SaveWithInvalidEntriesStateAndZipFixed Error Displayed              Test case passed.            3/3       
+SaveWithInvalidEntriesStateAndZipFixed Target File Not Created      Test case passed.            2/2       
+SaveWithInvalidEntriesStateFixed       Error Displayed              Test case passed.            3/3       
+SaveWithInvalidEntriesStateFixed       Target File Not Created      Test case passed.            2/2       
+----------------------------------------------------------------------------------------------------
+
+Total Score = 80

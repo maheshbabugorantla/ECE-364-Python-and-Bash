@@ -1,0 +1,19 @@
+Prelab04/ee364g01/
+
+
+------------------------------------------------------------------------------------------
+FUNCTION                   | DESCRIPTION                | COMMENTS                   | POINTS    
+------------------------------------------------------------------------------------------
+getPossibleMatches                                        Test case passed.            2         
+getPurchaseReport                                         Test case FAILED.            0         
+getStateName                                              Test case passed.            2         
+getTotalSold                                              Test case passed.            2         
+getZipCodes                                               Test case passed.            2         
+printNames                                                Test case passed.            2         
+printSortedMap                                            Test case passed.            2         
+scaleSet                                                  Test case passed.            2         
+switchNames                                               Test case passed.            2         
+uniqueLetters                                             Function failed to run.      0         
+------------------------------------------------------------------------------------------
+
+Total Score = 16

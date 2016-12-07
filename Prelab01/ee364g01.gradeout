@@ -1,0 +1,48 @@
+########################
+ee364g01/sum.bash
+########################
+
+Passed
+Points: 2
+########################
+ee364g01/exist.bash
+########################
+
+Passed
+Points: 1
+########################
+ee364g01/line_num.bash
+########################
+
+Passed
+Points: 2
+########################
+ee364g01/check_file.bash
+########################
+
+Passed
+Passed
+GOT OUTPUT:                                                     EXPECTED OUTPUT:
+Usage: ee364g01/check_file.bash <filename>		      |	Usage: ./check_file.bash <filename>
+Points earned(out of 1): 1
+Passed
+Points: 5
+########################
+ee364g01/svncheck.bash
+########################
+
+GOT OUTPUT:                                                     EXPECTED OUTPUT:
+ 							      |	Error: File __tmp__ appears to not exist here or in exit_fail
+Points earned(out of 5): 0
+Failed
+NOTE: Some manual grading of this file was done and you may have received more points than what
+      was reported here.
+Points: 0
+########################
+ee364g01/sensor_sum.sh
+########################
+
+Passed
+Points: 5
+
+Total Score: 15/20
